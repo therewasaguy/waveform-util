@@ -42,8 +42,8 @@ generate_peaks = (audio_path, output_width, duration, sample_rate, channels, cb)
   pcm.getPcmData(audio_path 
     {stereo: channels is 2, sample_rate: sample_rate}
     (sample, channel) ->
-      sample = Math.abs sample
-      current_max = sample if sample > current_max
+      abs_sample = Math.abs sample
+      current_max = sample if abs_sample > Math.abs current_max
 
       # Store a peak value once we've examined every sample
       # in this round of peaks
@@ -63,7 +63,7 @@ generate_peaks = (audio_path, output_width, duration, sample_rate, channels, cb)
     if current_max > 0
       current_max = alt_log_meter coefficient_to_db current_max
     else
-      current_max = -alt_log_meter coefficient_to_db current_max
+      current_max = -alt_log_meter coefficient_to_db -current_max
     peaks[peak_index++] = current_max
 
     if current_max > total_max
