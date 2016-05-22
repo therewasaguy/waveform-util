@@ -65,6 +65,7 @@ generate_peaks = (audio_path, output_width, duration, sample_rate, channels, cb)
     else
       current_max = -alt_log_meter coefficient_to_db current_max
     peaks[peak_index++] = current_max
+    peaks[peak_index++] = -current_max
 
     if current_max > total_max
       total_max = current_max
